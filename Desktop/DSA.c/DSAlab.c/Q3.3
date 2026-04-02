@@ -1,0 +1,57 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<stdbool.h>
+int top=-1;
+
+void push(char stack[],char value,int n)
+{
+if(top==n-1)
+{
+printf("stack overflow");
+return;}
+top++;
+stack[top]=value;
+
+}
+
+ char pop(char stack[])
+{
+char popedvalue;
+if(top==-1)
+{
+printf("stack underflow\n");
+return popedvalue;
+}
+ popedvalue=stack[top];
+top--;
+return popedvalue;
+}
+int main()
+{
+int n;
+scanf("%d",&n);
+char input[n];
+scanf("%s",input);
+char stack[n];
+for(int i=0;i<n;i++)
+{
+if(input[i]=='('  ||  input[i]=='{' ||input[i]=='[')
+{
+push(stack,input[i],n);
+}
+else
+{
+char popedvalue=pop(stack);
+if(!((input[i]==')'&&popedvalue=='(') ||(input[i]==']'&&popedvalue=='[') || (input[i]=='}'&&popedvalue=='{')))
+{
+printf("string is unbalanced\n");
+exit (0);
+}
+}
+}
+
+if(top==-1)
+printf("string is balanced\n");
+else
+printf("String unbalancd\n");
+}
